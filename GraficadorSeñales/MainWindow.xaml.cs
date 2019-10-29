@@ -175,8 +175,10 @@ namespace GraficadorSeñales
             if (cbOperacion.SelectedIndex == 4)
             {
                 int indiceMaximo = 0;
-                int indiceMaximo2 = 0;
-                for(int i=0; i < señalResultante.Muestras.Count/2; i++)
+                int indiceInicial = (int)((690.0*(double)(señalResultante.Muestras.Count))/señalResultante.FrecuenciaMuestreo);
+                int indiceFinal = (int)((950.0 * (double)(señalResultante.Muestras.Count)) / señalResultante.FrecuenciaMuestreo);
+                //Frecuancia Baja
+                for (int i=indiceInicial; i < indiceFinal; i++)
                 {
                     if( señalResultante.Muestras[i].Y > señalResultante.Muestras[indiceMaximo].Y)
                     {
@@ -184,18 +186,81 @@ namespace GraficadorSeñales
                     }
                 }
                 double frecuencia = (double)(indiceMaximo * señalResultante.FrecuenciaMuestreo) / (double)señalResultante.Muestras.Count;
-                lblHz.Text = frecuencia.ToString("N") + " Hz";
+                lblHz_Baja.Text = frecuencia.ToString("N") + " Hz";
+                //Frecuencia Alta
+                int indiceInicialAlta = (int)((1200.0 * (double)(señalResultante.Muestras.Count)) / señalResultante.FrecuenciaMuestreo);
+                int indiceFinalAlta = (int)((1482.0 * (double)(señalResultante.Muestras.Count)) / señalResultante.FrecuenciaMuestreo);
+                int indiceMaximoAlta = 0;
 
-                for (int i = señalResultante.Muestras.Count/2; i > señalResultante.Muestras.Count / 2; i++)
+                for (int i = indiceInicialAlta; i < indiceFinalAlta; i++)
                 {
-                    if (señalResultante.Muestras[i].Y < señalResultante.Muestras[indiceMaximo2].Y)
+                    if (señalResultante.Muestras[i].Y > señalResultante.Muestras[indiceMaximoAlta].Y)
                     {
-                        indiceMaximo2 = i;
+                        indiceMaximoAlta = i;
                     }
                 }
-                double frecuencia2 = (double)(indiceMaximo2 * señalResultante.FrecuenciaMuestreo) / (double)señalResultante.Muestras.Count;
-                lblHz2.Text = frecuencia2.ToString("N") + " Hz";
-
+                double frecuenciaAlta = (double)(indiceMaximoAlta * señalResultante.FrecuenciaMuestreo) / (double)señalResultante.Muestras.Count;
+                lblHz_Alta.Text = frecuenciaAlta.ToString("N") + " Hz";
+                if(frecuencia > 695 && frecuencia < 699)
+                {
+                    if(frecuenciaAlta > 1207 && frecuenciaAlta < 1211)
+                    {
+                        lblTecla.Text = "1";
+                    }
+                    if (frecuenciaAlta > 1334 && frecuenciaAlta < 1338)
+                    {
+                        lblTecla.Text = "2";
+                    }
+                    if (frecuenciaAlta > 1475 && frecuenciaAlta < 1479)
+                    {
+                        lblTecla.Text = "3";
+                    }
+                }
+                if (frecuencia > 768 && frecuencia < 772)
+                {
+                    if (frecuenciaAlta > 1207 && frecuenciaAlta < 1211)
+                    {
+                        lblTecla.Text = "4";
+                    }
+                    if (frecuenciaAlta > 1334 && frecuenciaAlta < 1338)
+                    {
+                        lblTecla.Text = "5";
+                    }
+                    if (frecuenciaAlta > 1475 && frecuenciaAlta < 1479)
+                    {
+                        lblTecla.Text = "6";
+                    }
+                }
+                if (frecuencia > 850 && frecuencia < 854)
+                {
+                    if (frecuenciaAlta > 1207 && frecuenciaAlta < 1211)
+                    {
+                        lblTecla.Text = "7";
+                    }
+                    if (frecuenciaAlta > 1334 && frecuenciaAlta < 1338)
+                    {
+                        lblTecla.Text = "8";
+                    }
+                    if (frecuenciaAlta > 1475 && frecuenciaAlta < 1479)
+                    {
+                        lblTecla.Text = "9";
+                    }
+                }
+                if (frecuencia > 939 && frecuencia < 943)
+                {
+                    if (frecuenciaAlta > 1207 && frecuenciaAlta < 1211)
+                    {
+                        lblTecla.Text = "*";
+                    }
+                    if (frecuenciaAlta > 1334 && frecuenciaAlta < 1338)
+                    {
+                        lblTecla.Text = "0";
+                    }
+                    if (frecuenciaAlta > 1475 && frecuenciaAlta < 1479)
+                    {
+                        lblTecla.Text = "#";
+                    }
+                }
             }
 
             //Original
